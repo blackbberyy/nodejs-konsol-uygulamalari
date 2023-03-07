@@ -1,0 +1,65 @@
+console uygulamaları
+
+örnek 1
+console üzerinden girilen sayıların toplamını bulma
+
+const readLine = require('readline')
+const process = require('process')
+
+const rL = readline.createInterface({
+input:process.stdin,
+putput:process.stdout,
+})
+
+rl.question('sayı 1 giriniz' , (num1) =>{
+rl.question('sayı 2 giriniz' , (num2) =>{
+const result = Number(num1) + Number(num2)
+console.log('sayıların toplamı' + result)
+rl.close()
+ })
+})
+
+örnek 2
+console üzerinden belirtilen dosyanın okunması
+const readline = require('readline')
+const fs = require('fs')
+const c = require('ansi-colors')
+
+const fileName = process.argv[2]
+const colors =['red' , 'blue' , 'yellow' , 'green' , 'cyan']
+
+const readFileLineByLine = async() => {
+const fileStream=fs.createReadStream(fileName)
+const rl= readline.createInterface({
+input:fileStream
+})
+for await (const Line of rl) {                 
+const rNumber = Math.floor(Math.random()*4)
+const rColor = colors[rNumber]
+console.log(c[rColor](line))
+}
+}
+readFileLineByLine()
+
+//for await (const line of readInterface) döngüsü, readInterface nesnesinden okunan her satır için bir işlem yapar. const line değişkeni, her satırın içeriğini temsil eder. Bu döngü, readline modülü tarafından sağlanan bir asenkron döngüdür ve for await...of ifadesi kullanılarak kullanılır. Bu nedenle, bu döngüden önce async işlev tanımlamalısınız.
+
+=terminale node index.js first.txt 
+
+
+örnek 3
+console üzerinden girilen ifadeye göre QR code olusturma
+npm init -y
+npm install qrcode-terminal
+
+const qrcode = require('qrcode-terminal')
+const readLine = require('readline')
+const process = require('process')
+
+const rl = readline.createInterface({
+input:process.stdin , 
+output:process.stdout
+})
+rl.question('QR ne için oluşturulsun? ' \r\n (ans)=>{
+qrcode.generate(ans, {small:true}
+rl.close()
+})
